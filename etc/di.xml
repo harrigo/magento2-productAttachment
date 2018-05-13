@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Prince\Productattach\Api\ProductattachInterface" type="Prince\Productattach\Model\ProductattachWebApi"/>
+    <preference for="Prince\Productattach\Api\ProductattachWebApiInterface" type="Prince\Productattach\Model\ProductattachWebApi"/>
     <preference for="Prince\Productattach\Api\Data\ProductattachTableInterface" type="Prince\Productattach\Model\ProductattachTable"/>
     <virtualType name="Prince\Productattach\Model\ResourceModel\Productattach\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
@@ -22,4 +22,24 @@
             <argument name="resourceModel" xsi:type="string">Prince\Productattach\Model\ResourceModel\Fileicon\Collection</argument>
         </arguments>
     </virtualType>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\Catalog\Api\Data\ProductInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="prince_attachment_read" xsi:type="string">Prince\Productattach\Model\Product\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="prince_attachmentk_create" xsi:type="string">Prince\Productattach\Model\Product\CreateHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="prince_attachment_update" xsi:type="string">Prince\Productattach\Model\Product\UpdateHandler</item>
+                    </item>
+                    <item name="delete" xsi:type="array">
+                        <item name="prince_attachment_delete" xsi:type="string">Prince\Productattach\Model\Product\DeleteHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
