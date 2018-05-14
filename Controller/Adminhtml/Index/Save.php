@@ -135,8 +135,7 @@ class Save extends \Magento\Backend\App\Action
 
         try {
             if (isset($_FILES['file']) && $_FILES['file']['name'] != '') {
-                $imageFile = $this->helper->uploadFile('file');
-                $model->setFile($imageFile);
+                $imageFile = $this->helper->uploadFile('file', $model);
             }
 
             $model->save();
