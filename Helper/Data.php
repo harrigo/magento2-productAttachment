@@ -313,9 +313,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getFileSize($file)
     {
-        $fileSize = $this->mediaDirectory->stat($file)['size'];
-        $readableSize = $this->convertToReadableSize($fileSize);
-        return $readableSize;
+		try {
+			$fileSize = $this->mediaDirectory->stat($file)['size'];
+			$readableSize = $this->convertToReadableSize($fileSize);
+			return $readableSize;
+		} catch (\Magento\Framework\Exception\FileSystemException $e) {
+			return "N/A";
+		}
     }
 
     /**
